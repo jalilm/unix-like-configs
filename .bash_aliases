@@ -1,20 +1,31 @@
 WHOAMI=`whoami`
 mkdir /tmp/"$WHOAMI" > /dev/null 2>&1
+
 complete -F _longopt -- -
 complete -F _longopt -- --
 complete -F _longopt -- less
-alias -- -='less -Ci'
-alias -- --='less -NCi'
+
+alias -- -='less -RCi'
+alias -- --='less -RNCi'
+
 alias ls='ls -F --color=auto'
 alias lt='ls -Aglt'
 alias ll='ls -alF'
-alias so='source'
+
 alias ff='find . -type f -name '
 alias fd='find . -type d -name '
-alias jobs='jobs -l'
+
 alias cp='cp -r'
-alias groups='groups "$WHOAMI"'
+
+alias jobs='jobs -l'
 alias bg_jobs='ps aux | grep "$WHOAMI" | -'
+
+alias cgrep='grep -c'
+alias egrap='grep -e'
+alias vgrep='grep -v'
+
+alias groups='groups "$WHOAMI"'
+
 #If the last character of the alias value is a space or tab character, then the next command word following the alias is also checked for alias expansion.
 alias sudo='sudo '
 export PYTHONPATH=${PYTHONPATH}:~
