@@ -40,6 +40,11 @@ keep_only() {
     mv /tmp/"$WHOAMI"/$1 .
 }
 
+mm() {
+    cp -rl $1 $2
+    rm -r $1
+}
+
 cdp() {
     pushd . && cd $1
 }
