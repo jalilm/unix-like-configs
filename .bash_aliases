@@ -60,3 +60,8 @@ pb_notify () {
 calc () {
     awk "BEGIN { print $*}";
 }
+
+myscreen() {
+    screen -dmS ${1// /_};
+    screen -S ${1// /_} -p 0 -X stuff "PATH=$PATH:. $1\n";
+}
