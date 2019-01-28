@@ -56,7 +56,11 @@ mkcd() {
 }
 
 pb_notify () {
-    curl --header 'Authorization: Bearer ${PushBullet_AUTH}' -X POST https://api.pushbullet.com/v2/pushes --header 'Content-Type: application/json' --data-binary '{"type": "note", "title": "Shell Notification", "body": "'$1'"}' > /dev/null 2>&1
+    curl --header 'Access-Token: '"${PushBullet_AUTH}" \
+        --header 'Content-Type: application/json' \
+        --data-binary '{"type":"note", "title":"Shell - '"$HOSTNAME"'", "body":"'"$1"'"}' \
+        --request POST \
+        https://api.pushbullet.com/v2/pushes > /dev/null 2>&1
 }
 
 calc () {
