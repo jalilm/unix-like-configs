@@ -1,5 +1,7 @@
 WHOAMI=`whoami`
 mkdir /tmp/"$WHOAMI" > /dev/null 2>&1
+TRASH=~/.trash_bin
+mkdir $TRASH > /dev/null 2>&1
 
 complete -F _longopt -- -
 complete -F _longopt -- --
@@ -64,4 +66,10 @@ calc () {
 myscreen() {
     screen -dmS ${1// /_};
     screen -S ${1// /_} -p 0 -X stuff "PATH=$PATH:. $1\n";
+}
+
+trash() {
+    dst_path=$TRASH/`pwd`/;
+    mkdir -p ${dst_path};
+    mv $1 ${dst_path}$1.$(date +"%Y-%m-%d_%H:%M:%S");
 }
