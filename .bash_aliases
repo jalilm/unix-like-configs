@@ -68,9 +68,16 @@ calc () {
 }
 
 myscreen() {
-    screen -dmS ${1// /_};
-    screen -S ${1// /_} -p 0 -X stuff "PATH=$PATH:. $1\n";
+    if [[ $1 == *.* ]] ; then
+        echo 'myscreen can not process a command with . charecter. Please note it adds . and .. automaticlly to $PATH';
+        return;
+    fi
+    screen_name=${1// /_};
+    screen_name=${screen_name//;/+};
+    screen -dmS ${screen_name};
+    screen -S ${screen_name} -p 0 -X stuff "PATH=$PATH:.:.. $1\n";
 }
+
 
 trash() {
     dst_path=$TRASH/`pwd`/;
